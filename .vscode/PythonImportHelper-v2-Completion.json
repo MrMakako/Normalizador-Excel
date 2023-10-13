@@ -1,0 +1,125 @@
+[
+    {
+        "label": "openpyxl",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "openpyxl",
+        "description": "openpyxl",
+        "detail": "openpyxl",
+        "documentation": {}
+    },
+    {
+        "label": "load_workbook",
+        "importPath": "openpyxl",
+        "description": "openpyxl",
+        "isExtraImport": true,
+        "detail": "openpyxl",
+        "documentation": {}
+    },
+    {
+        "label": "coordinate_from_string",
+        "importPath": "openpyxl.utils.cell",
+        "description": "openpyxl.utils.cell",
+        "isExtraImport": true,
+        "detail": "openpyxl.utils.cell",
+        "documentation": {}
+    },
+    {
+        "label": "column_index_from_string",
+        "importPath": "openpyxl.utils.cell",
+        "description": "openpyxl.utils.cell",
+        "isExtraImport": true,
+        "detail": "openpyxl.utils.cell",
+        "documentation": {}
+    },
+    {
+        "label": "PySimpleGUI",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "PySimpleGUI",
+        "description": "PySimpleGUI",
+        "detail": "PySimpleGUI",
+        "documentation": {}
+    },
+    {
+        "label": "excell",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "excell",
+        "description": "excell",
+        "detail": "excell",
+        "documentation": {}
+    },
+    {
+        "label": "find_combination",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def find_combination(search_value):\n    for key,value in combinations.items():\n       if set(value) == set(search_value):\n           return True\n    return False\ndef step_1(ws):\n   for table in ws.tables.values():\n       ref=table.ref\n       columns= len(table.tableColumns)\ndef step_2(ws):",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "step_1",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def step_1(ws):\n   for table in ws.tables.values():\n       ref=table.ref\n       columns= len(table.tableColumns)\ndef step_2(ws):\n   for data in ws.iter_rows(max_col=columns, values_only=True,min_row=2):\n       batch_number=str(data[0])\n       if(batch_number not in batches.keys()):\n           print(\"adding first key\")\n           batches[batch_number]=[data[1]]",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "step_2",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def step_2(ws):\n   for data in ws.iter_rows(max_col=columns, values_only=True,min_row=2):\n       batch_number=str(data[0])\n       if(batch_number not in batches.keys()):\n           print(\"adding first key\")\n           batches[batch_number]=[data[1]]\n           peso_tela[batch_number]=data[2]\n       else:\n           batches[batch_number].append(data[1])\n           print(\"key already found\")",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "step_3",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def step_3():\n    counter=0\n    for key, value in batches.items():\n     if find_combination(value) !=True:\n         if(counter<10):\n             combinations[f\"DT0{counter}\"]=value\n         else:  \n             combinations[f\"DT{counter}\"]=value\n         counter+=1\n     else:",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "step_4",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def step_4():\n    for key1, list_val in batches.items():\n        for key,list_val2 in combinations.items():\n            if set(list_val)==set(list_val2):\n                fixed_batches[key1]=key;\ndef run_procedure(file,sheet,out):\n   wb = load_workbook(filename=file,read_only=False)\n   ws=wb[sheet]\n   step_1(ws)\n   step_2(ws)",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "run_procedure",
+        "kind": 2,
+        "importPath": "app.app.excell",
+        "description": "app.app.excell",
+        "peekOfCode": "def run_procedure(file,sheet,out):\n   wb = load_workbook(filename=file,read_only=False)\n   ws=wb[sheet]\n   step_1(ws)\n   step_2(ws)\n   step_3()\n   step_4()\n   workbook = openpyxl.Workbook()\n   worksheet = workbook.active\n   worksheet.title = \"Lotes\"",
+        "detail": "app.app.excell",
+        "documentation": {}
+    },
+    {
+        "label": "layout",
+        "kind": 5,
+        "importPath": "app.app.main",
+        "description": "app.app.main",
+        "peekOfCode": "layout = [  [sg.Text('Normalizar Tablas')],\n            [sg.Text('Directorio de archivo excell') ],\n            [[sg.InputText(size=(60,30)),sg.FileBrowse(key=\"-IN-\")]],\n            [sg.Text(\"Nuevo Archivo\")],\n            [ sg.InputText(size=(60,30),key=\"-OUT-\"), sg.FolderBrowse(\"Folder\")],\n            [sg.Text(\"Nombre de hoja\"),sg.InputText(size=(60,30),key=\"SHEET\")],\n            [sg.Button('Ok',size=button_size) , sg.Button('Cancel',size=button_size)] ]\n# Create the Window\nwindow = sg.Window('Normalizador Excel', layout,size=(600,250))\n# Event Loop to process \"events\" and get the \"values\" of the inputs",
+        "detail": "app.app.main",
+        "documentation": {}
+    },
+    {
+        "label": "window",
+        "kind": 5,
+        "importPath": "app.app.main",
+        "description": "app.app.main",
+        "peekOfCode": "window = sg.Window('Normalizador Excel', layout,size=(600,250))\n# Event Loop to process \"events\" and get the \"values\" of the inputs\nwhile True:\n    event, values = window.read()\n    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel\n        break\n    elif event ==\"Ok\":\n        file=values[\"-IN-\"]\n        out=values[\"-OUT-\"]\n        sheet=values[\"SHEET\"]",
+        "detail": "app.app.main",
+        "documentation": {}
+    }
+]
